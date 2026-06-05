@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import CategoryFilter from '../../components/CategoryFilter.astro';
+import taxonomy from '../../data/taxonomy.json';
+import work from '../../data/work.json';
+
+const usedSlugs = new Set(work.flatMap((p) => p.workTypes.map((c) => c.slug)));
+const workTypes = taxonomy.workTypes.filter((c) => usedSlugs.has(c.slug));
+---
+
+<BaseLayout title="Work" description="BPD Healthcare case studies and client work.">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-brand mb-2">Our Work</h1>
+    <p class="text-slate-500 mb-8">Case studies and client engagements across brand, communications, and marketing.</p>
+
+    {workTypes.length > 0 && (
+      <div class="mb-8">
+        <CategoryFilter categories={workTypes} basePath="/work/category/" allHref="/work/" />
+      </div>
+    )}
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {work.map((post) => (
+        <PostCard
+          title={post.title}
+          slug={post.slug}
+          date={post.date}
+          excerpt={post.excerpt || post.content}
+          categories={post.workTypes}
+          badge="Case Study"
+          badgeColor="bg-emerald-100 text-emerald-800"
+          href={`/work/${post.slug}/`}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

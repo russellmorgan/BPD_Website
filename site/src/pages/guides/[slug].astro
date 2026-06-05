@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import guides from '../../data/guides.json';
+
+export function getStaticPaths() {
+  return guides.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const dateStr = new Date(post.date).toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+const excerpt = post.excerpt?.replace(/<[^>]*>/g, '').slice(0, 160) || '';
+---
+
+<BaseLayout title={post.title} description={excerpt}>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <nav class="text-sm text-slate-400 mb-6">
+      <a href="/" class="hover:text-accent">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/guides/" class="hover:text-accent">Guides</a>
+      <span class="mx-2">›</span>
+      <span class="text-slate-600 truncate">{post.title}</span>
+    </nav>
+
+    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase bg-teal-100 text-teal-800 mb-4">
+      Guide
+    </span>
+
+    <h1 class="text-3xl sm:text-4xl font-bold text-brand leading-tight mb-4">{post.title}</h1>
+    <time class="text-sm text-slate-400 block mb-8">{dateStr}</time>
+
+    {post.content
+      ? <div class="prose" set:html={post.content} />
+      : <p class="text-slate-500 italic">Content not available.</p>
+    }
+
+    <div class="mt-12 pt-8 border-t border-slate-100">
+      <a href="/guides/" class="text-sm font-medium text-accent hover:underline">← Back to Guides</a>
+    </div>
+  </article>
+</BaseLayout>

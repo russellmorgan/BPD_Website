@@ -1,0 +1,63 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  date: string;
+  excerpt?: string;
+  categories?: { slug: string; name: string }[];
+  badge?: string;
+  badgeColor?: string;
+  href: string;
+}
+
+const {
+  title,
+  date,
+  excerpt,
+  categories = [],
+  badge,
+  badgeColor = 'bg-accent-light text-accent',
+  href,
+} = Astro.props;
+
+const dateStr = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const snippetText = excerpt
+  ? excerpt.replace(/<[^>]*>/g, '').slice(0, 180).trim()
+  : '';
+const snippet = snippetText.length === 180 ? snippetText + '…' : snippetText;
+---
+
+<article class="bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+  <div class="p-5 flex flex-col flex-1">
+    <div class="flex flex-wrap items-center gap-2 mb-3">
+      {badge && (
+        <span class={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wide ${badgeColor}`}>
+          {badge}
+        </span>
+      )}
+      {categories.slice(0, 2).map((cat) => (
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-600">
+          {cat.name}
+        </span>
+      ))}
+    </div>
+
+    <h2 class="text-base font-semibold text-slate-900 leading-snug mb-2 line-clamp-3">
+      <a href={href} class="hover:text-accent transition-colors">{title}</a>
+    </h2>
+
+    {snippet && (
+      <p class="text-sm text-slate-600 line-clamp-3 flex-1 mb-3">{snippet}</p>
+    )}
+
+    <div class="mt-auto flex items-center justify-between">
+      <time class="text-xs text-slate-400">{dateStr}</time>
+      <a href={href} class="text-xs font-medium text-accent hover:underline">Read more →</a>
+    </div>
+  </div>
+</article>

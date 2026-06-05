@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import events from '../../data/events.json';
+
+function strip(html: string) {
+  return html.replace(/<[^>]*>/g, '').trim();
+}
+---
+
+<BaseLayout title="Events" description="BPD Healthcare events and speaking engagements.">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-brand mb-2">Events</h1>
+    <p class="text-slate-500 mb-8">{events.length} events and speaking engagements.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {events.map((event) => {
+        const excerpt = event.meta.event_excerpt || strip(event.content).slice(0, 200);
+        const snippet = excerpt.length > 200 ? excerpt.slice(0, 200) + '…' : excerpt;
+        const dateDisplay = event.meta.event_date_display || event.meta.event_date || '';
+        const location = event.meta.event_location || '';
+        return (
+          <article class="bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+            <div class="p-5 flex flex-col flex-1">
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase tracking-wide bg-amber-100 text-amber-800 mb-3 self-start">
+                Event
+              </span>
+              <h2 class="text-base font-semibold text-slate-900 leading-snug mb-2 line-clamp-2">
+                <a href={`/events/${event.slug}/`} class="hover:text-accent transition-colors">{event.title}</a>
+              </h2>
+              {(dateDisplay || location) && (
+                <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500 mb-3">
+                  {dateDisplay && (
+                    <span class="flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      </svg>
+                      {dateDisplay}
+                    </span>
+                  )}
+                  {location && (
+                    <span class="flex items-center gap-1">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      </svg>
+                      {location}
+                    </span>
+                  )}
+                </div>
+              )}
+              {snippet && <p class="text-sm text-slate-600 line-clamp-3 flex-1 mb-3">{snippet}</p>}
+              <div class="mt-auto">
+                <a href={`/events/${event.slug}/`} class="text-xs font-medium text-accent hover:underline">View details →</a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+interface Props {
+  categories: { slug: string; name: string }[];
+  basePath: string;
+  allHref?: string;
+  current?: string;
+}
+
+const { categories, basePath, allHref, current } = Astro.props;
+const allLink = allHref ?? basePath;
+---
+
+<div class="flex flex-wrap gap-2">
+  <a
+    href={allLink}
+    class={[
+      'px-4 py-1.5 rounded-full text-sm font-medium transition-colors',
+      !current
+        ? 'bg-brand text-white'
+        : 'bg-slate-100 text-slate-700 hover:bg-slate-200',
+    ].join(' ')}
+  >
+    All
+  </a>
+  {categories.map((cat) => (
+    <a
+      href={`${basePath}${cat.slug}/`}
+      class={[
+        'px-4 py-1.5 rounded-full text-sm font-medium transition-colors',
+        current === cat.slug
+          ? 'bg-brand text-white'
+          : 'bg-slate-100 text-slate-700 hover:bg-slate-200',
+      ].join(' ')}
+    >
+      {cat.name}
+    </a>
+  ))}
+</div>

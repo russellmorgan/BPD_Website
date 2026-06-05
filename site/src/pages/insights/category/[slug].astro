@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import CategoryFilter from '../../../components/CategoryFilter.astro';
+import taxonomy from '../../../data/taxonomy.json';
+import posts from '../../../data/posts.json';
+
+const cats = taxonomy.categories.filter((c) =>
+  posts.some((p) => p.categories.some((pc) => pc.slug === c.slug))
+);
+
+export function getStaticPaths() {
+  const usedSlugs = new Set(
+    posts.flatMap((p) => p.categories.map((c) => c.slug))
+  );
+  return taxonomy.categories
+    .filter((c) => usedSlugs.has(c.slug))
+    .map((cat) => ({
+      params: { slug: cat.slug },
+      props: { cat },
+    }));
+}
+
+const { cat } = Astro.props;
+const filtered = posts.filter((p) =>
+  p.categories.some((c) => c.slug === cat.slug)
+);
+---
+
+<BaseLayout title={`${cat.name} – Insights`} description={`Insights tagged with ${cat.name}.`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-brand mb-2">Insights: {cat.name}</h1>
+    <p class="text-slate-500 mb-8">{filtered.length} articles</p>
+
+    <div class="mb-8">
+      <CategoryFilter categories={cats} basePath="/insights/category/" current={cat.slug} />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {filtered.map((post) => (
+        <PostCard
+          title={post.title}
+          slug={post.slug}
+          date={post.date}
+          excerpt={post.excerpt || post.content}
+          categories={post.categories}
+          href={`/insights/${post.slug}/`}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

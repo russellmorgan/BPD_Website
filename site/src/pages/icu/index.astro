@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import CategoryFilter from '../../components/CategoryFilter.astro';
+import taxonomy from '../../data/taxonomy.json';
+import icuBlog from '../../data/icu-blog.json';
+import icuUpdates from '../../data/icu-updates.json';
+
+// Merge and sort by date
+const all = [
+  ...icuBlog.map((p) => ({ ...p, _type: 'Blog' })),
+  ...icuUpdates.map((p) => ({ ...p, _type: 'Update' })),
+].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const usedSlugs = new Set(all.flatMap((p) => p.icuCategories.map((c) => c.slug)));
+const cats = taxonomy.icuCategories.filter((c) => usedSlugs.has(c.slug));
+---
+
+<BaseLayout title="ICU – Issues & Crisis Updates" description="Policy intelligence and issues updates for healthcare leaders.">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-brand mb-2">Issues &amp; Crisis Updates</h1>
+    <p class="text-slate-500 mb-8">Policy intelligence and healthcare industry developments from our team. {all.length} articles.</p>
+
+    <div class="mb-8">
+      <CategoryFilter categories={cats} basePath="/icu/category/" allHref="/icu/" />
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {all.map((post) => (
+        <PostCard
+          title={post.title}
+          slug={post.slug}
+          date={post.date}
+          excerpt={post.excerpt || post.content}
+          categories={post.icuCategories}
+          badge={post._type}
+          badgeColor={post._type === 'Blog' ? 'bg-blue-100 text-blue-800' : 'bg-orange-100 text-orange-800'}
+          href={`/icu/${post.slug}/`}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

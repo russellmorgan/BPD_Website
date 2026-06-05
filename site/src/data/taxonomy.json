@@ -1,0 +1,339 @@
+{
+  "categories": [
+    {
+      "id": "15",
+      "slug": "brand",
+      "name": "Brand"
+    },
+    {
+      "id": "14",
+      "slug": "communications",
+      "name": "Communications"
+    },
+    {
+      "id": "16",
+      "slug": "consumer-trends",
+      "name": "Consumer Trends"
+    },
+    {
+      "id": "17",
+      "slug": "digital-marketing",
+      "name": "Digital Marketing"
+    },
+    {
+      "id": "18",
+      "slug": "health-technology",
+      "name": "Health Technology"
+    },
+    {
+      "id": "12",
+      "slug": "issues",
+      "name": "Issues"
+    },
+    {
+      "id": "69",
+      "slug": "issues-crisis",
+      "name": "Issues/Crisis"
+    },
+    {
+      "id": "11",
+      "slug": "marketing",
+      "name": "Marketing"
+    },
+    {
+      "id": "71",
+      "slug": "organizational-transactions",
+      "name": "Organizational Transactions"
+    },
+    {
+      "id": "70",
+      "slug": "payor-provider",
+      "name": "Payor Provider"
+    },
+    {
+      "id": "13",
+      "slug": "strategy",
+      "name": "Strategy"
+    },
+    {
+      "id": "1",
+      "slug": "uncategorized",
+      "name": "Uncategorized"
+    }
+  ],
+  "icuCategories": [
+    {
+      "id": "72",
+      "slug": "2025-budget",
+      "name": "2025 Budget",
+      "parent": ""
+    },
+    {
+      "id": "75",
+      "slug": "affordable-care-act",
+      "name": "Affordable Care Act",
+      "parent": ""
+    },
+    {
+      "id": "79",
+      "slug": "budget",
+      "name": "Budget",
+      "parent": ""
+    },
+    {
+      "id": "57",
+      "slug": "dei",
+      "name": "DEI",
+      "parent": ""
+    },
+    {
+      "id": "51",
+      "slug": "doge",
+      "name": "DOGE",
+      "parent": ""
+    },
+    {
+      "id": "56",
+      "slug": "executive-order",
+      "name": "Executive Order",
+      "parent": ""
+    },
+    {
+      "id": "74",
+      "slug": "gender-affirming-care",
+      "name": "Gender-Affirming Care",
+      "parent": ""
+    },
+    {
+      "id": "76",
+      "slug": "h-r-1-obba",
+      "name": "H.R. 1 - OBBA",
+      "parent": ""
+    },
+    {
+      "id": "61",
+      "slug": "hhs",
+      "name": "HHS",
+      "parent": ""
+    },
+    {
+      "id": "73",
+      "slug": "immigration",
+      "name": "Immigration",
+      "parent": ""
+    },
+    {
+      "id": "50",
+      "slug": "medicaid",
+      "name": "Medicaid",
+      "parent": ""
+    },
+    {
+      "id": "63",
+      "slug": "pharmaceuticals",
+      "name": "Pharmaceuticals",
+      "parent": ""
+    },
+    {
+      "id": "59",
+      "slug": "public-health",
+      "name": "Public Health",
+      "parent": ""
+    },
+    {
+      "id": "77",
+      "slug": "rural-health",
+      "name": "Rural Health",
+      "parent": ""
+    },
+    {
+      "id": "68",
+      "slug": "scotus",
+      "name": "SCoTUS",
+      "parent": ""
+    },
+    {
+      "id": "78",
+      "slug": "state-issues",
+      "name": "State Issues",
+      "parent": ""
+    },
+    {
+      "id": "80",
+      "slug": "supply-chains",
+      "name": "Supply Chains",
+      "parent": ""
+    },
+    {
+      "id": "52",
+      "slug": "tariffs",
+      "name": "Tariffs",
+      "parent": ""
+    },
+    {
+      "id": "66",
+      "slug": "weekly-wrap-up",
+      "name": "Weekly Wrap Up",
+      "parent": ""
+    }
+  ],
+  "workTypes": [
+    {
+      "id": "34",
+      "slug": "ai-applications",
+      "name": "AI Applications",
+      "parent": ""
+    },
+    {
+      "id": "33",
+      "slug": "audience-sizing-and-segmentation",
+      "name": "Audience Sizing and Segmentation",
+      "parent": ""
+    },
+    {
+      "id": "9",
+      "slug": "brand",
+      "name": "Brand",
+      "parent": ""
+    },
+    {
+      "id": "27",
+      "slug": "brand-architecture",
+      "name": "Brand Architecture",
+      "parent": ""
+    },
+    {
+      "id": "28",
+      "slug": "brand-campaign",
+      "name": "Brand Campaign",
+      "parent": ""
+    },
+    {
+      "id": "26",
+      "slug": "brand-identity",
+      "name": "Brand Identity",
+      "parent": ""
+    },
+    {
+      "id": "29",
+      "slug": "brand-measurement",
+      "name": "Brand Measurement",
+      "parent": ""
+    },
+    {
+      "id": "25",
+      "slug": "brand-strategy",
+      "name": "Brand Strategy",
+      "parent": ""
+    },
+    {
+      "id": "32",
+      "slug": "business-opportunity-analysis",
+      "name": "Business Opportunity Analysis",
+      "parent": ""
+    },
+    {
+      "id": "24",
+      "slug": "communications",
+      "name": "Communications",
+      "parent": ""
+    },
+    {
+      "id": "38",
+      "slug": "creative-content",
+      "name": "Creative &amp; Content",
+      "parent": ""
+    },
+    {
+      "id": "30",
+      "slug": "data-analytics",
+      "name": "Data &amp; Analytics",
+      "parent": ""
+    },
+    {
+      "id": "39",
+      "slug": "execution-in-house-production",
+      "name": "Execution/ In-house production",
+      "parent": ""
+    },
+    {
+      "id": "36",
+      "slug": "integrated-marketing",
+      "name": "Integrated Marketing",
+      "parent": ""
+    },
+    {
+      "id": "46",
+      "slug": "internal-communications",
+      "name": "Internal Communications",
+      "parent": ""
+    },
+    {
+      "id": "40",
+      "slug": "media-planning-management",
+      "name": "Media Planning &amp; Management",
+      "parent": ""
+    },
+    {
+      "id": "43",
+      "slug": "mergers-acquisitions",
+      "name": "Mergers &amp; Acquisitions",
+      "parent": ""
+    },
+    {
+      "id": "44",
+      "slug": "payor-provider-communications",
+      "name": "Payor/Provider Communications",
+      "parent": ""
+    },
+    {
+      "id": "35",
+      "slug": "performance-measurement",
+      "name": "Performance Measurement",
+      "parent": ""
+    },
+    {
+      "id": "41",
+      "slug": "performance-tracking-optimization",
+      "name": "Performance Tracking &amp; Optimization",
+      "parent": ""
+    },
+    {
+      "id": "31",
+      "slug": "precision-marketing",
+      "name": "Precision Marketing",
+      "parent": ""
+    },
+    {
+      "id": "45",
+      "slug": "public-relations",
+      "name": "Public Relations",
+      "parent": ""
+    },
+    {
+      "id": "42",
+      "slug": "reputation-management",
+      "name": "Reputation Management",
+      "parent": ""
+    },
+    {
+      "id": "37",
+      "slug": "research",
+      "name": "Research",
+      "parent": ""
+    },
+    {
+      "id": "23",
+      "slug": "strategy",
+      "name": "Strategy",
+      "parent": ""
+    }
+  ],
+  "tags": [
+    {
+      "id": "47",
+      "slug": "brand-services",
+      "name": "Brand Services"
+    }
+  ]
+}

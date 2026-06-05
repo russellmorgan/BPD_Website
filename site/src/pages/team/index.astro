@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import staff from '../../data/staff.json';
+
+// Sort by menu order (original site order)
+const sorted = [...staff].sort((a, b) => a.menuOrder - b.menuOrder);
+---
+
+<BaseLayout title="Team" description="Meet the BPD Healthcare team.">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-brand mb-2">Our Team</h1>
+    <p class="text-slate-500 mb-10">The people behind BPD Healthcare.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {sorted.map((person) => {
+        const name = [person.firstName, person.lastName].filter(Boolean).join(' ') || person.title;
+        const bio = person.bio?.replace(/<[^>]*>/g, '').slice(0, 160).trim();
+        const bioSnippet = bio && bio.length === 160 ? bio + '…' : bio;
+        return (
+          <a
+            href={`/team/${person.slug}/`}
+            class="bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col"
+          >
+            <!-- Avatar placeholder -->
+            <div class="w-16 h-16 rounded-full bg-accent-light flex items-center justify-center mb-4">
+              <span class="text-accent font-bold text-xl">
+                {name.charAt(0).toUpperCase()}
+              </span>
+            </div>
+            <p class="font-semibold text-slate-900 leading-snug">{name}</p>
+            {person.role && (
+              <p class="text-xs text-accent font-medium mt-0.5 mb-2">{person.role}</p>
+            )}
+            {bioSnippet && (
+              <p class="text-sm text-slate-500 leading-relaxed line-clamp-3">{bioSnippet}</p>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

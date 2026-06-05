@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import work from '../../data/work.json';
+
+export function getStaticPaths() {
+  return work.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const dateStr = new Date(post.date).toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+const excerpt = post.excerpt?.replace(/<[^>]*>/g, '').slice(0, 160) || '';
+---
+
+<BaseLayout title={post.title} description={excerpt}>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <nav class="text-sm text-slate-400 mb-6">
+      <a href="/" class="hover:text-accent">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/work/" class="hover:text-accent">Work</a>
+      <span class="mx-2">›</span>
+      <span class="text-slate-600 truncate">{post.title}</span>
+    </nav>
+
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold uppercase bg-emerald-100 text-emerald-800">
+        Case Study
+      </span>
+      {post.workTypes.map((wt) => (
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
+          {wt.name}
+        </span>
+      ))}
+    </div>
+
+    <h1 class="text-3xl sm:text-4xl font-bold text-brand leading-tight mb-4">{post.title}</h1>
+    <time class="text-sm text-slate-400 block mb-8">{dateStr}</time>
+
+    {post.content
+      ? <div class="prose" set:html={post.content} />
+      : <p class="text-slate-500 italic">Content not available.</p>
+    }
+
+    <div class="mt-12 pt-8 border-t border-slate-100">
+      <a href="/work/" class="text-sm font-medium text-accent hover:underline">← Back to Work</a>
+    </div>
+  </article>
+</BaseLayout>

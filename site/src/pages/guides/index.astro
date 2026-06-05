@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import guides from '../../data/guides.json';
+---
+
+<BaseLayout title="Guides" description="Healthcare marketing guides and white papers from BPD Healthcare.">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-brand mb-2">Guides</h1>
+    <p class="text-slate-500 mb-8">In-depth guides and white papers on healthcare marketing and strategy.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {guides.map((post) => (
+        <PostCard
+          title={post.title}
+          slug={post.slug}
+          date={post.date}
+          excerpt={post.excerpt || post.content}
+          categories={post.categories}
+          badge="Guide"
+          badgeColor="bg-teal-100 text-teal-800"
+          href={`/guides/${post.slug}/`}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

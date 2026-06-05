@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import staff from '../../data/staff.json';
+
+export function getStaticPaths() {
+  return staff.map((person) => ({
+    params: { slug: person.slug },
+    props: { person },
+  }));
+}
+
+const { person } = Astro.props;
+const name = [person.firstName, person.lastName].filter(Boolean).join(' ') || person.title;
+const bioExcerpt = person.bio?.replace(/<[^>]*>/g, '').slice(0, 160) || '';
+---
+
+<BaseLayout title={name} description={bioExcerpt}>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <nav class="text-sm text-slate-400 mb-6">
+      <a href="/" class="hover:text-accent">Home</a>
+      <span class="mx-2">›</span>
+      <a href="/team/" class="hover:text-accent">Team</a>
+      <span class="mx-2">›</span>
+      <span class="text-slate-600">{name}</span>
+    </nav>
+
+    <div class="flex items-start gap-6 mb-8">
+      <!-- Avatar -->
+      <div class="flex-shrink-0 w-24 h-24 rounded-full bg-accent-light flex items-center justify-center">
+        <span class="text-accent font-bold text-4xl">
+          {name.charAt(0).toUpperCase()}
+        </span>
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold text-brand leading-tight">{name}</h1>
+        {person.role && (
+          <p class="text-accent font-medium mt-1">{person.role}</p>
+        )}
+        {person.linkedinUrl && (
+          <a
+            href={person.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 text-sm text-slate-400 hover:text-accent mt-2 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+            LinkedIn
+          </a>
+        )}
+      </div>
+    </div>
+
+    {person.bio && (
+      <div>
+        <h2 class="text-lg font-semibold text-brand mb-3">About</h2>
+        <div class="prose" set:html={person.bio} />
+      </div>
+    )}
+
+    {person.funFact && (
+      <div class="mt-8 bg-accent-light rounded-xl p-5">
+        <h2 class="text-sm font-semibold text-accent uppercase tracking-wide mb-2">Fun Fact</h2>
+        <p class="text-slate-700">{person.funFact}</p>
+      </div>
+    )}
+
+    <div class="mt-10 pt-8 border-t border-slate-100">
+      <a href="/team/" class="text-sm font-medium text-accent hover:underline">← Back to Team</a>
+    </div>
+  </div>
+</BaseLayout>
