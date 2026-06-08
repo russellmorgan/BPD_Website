@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import events from '../../data/events.json';
+import { url } from '../../lib/url.js';
 
 export function getStaticPaths() {
   return events.map((event) => ({
@@ -20,9 +21,9 @@ const excerpt = meta.event_excerpt?.replace(/<[^>]*>/g, '').slice(0, 160) || '';
 <BaseLayout title={event.title} description={excerpt}>
   <article class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
     <nav class="text-sm text-slate-400 mb-6">
-      <a href="/" class="hover:text-accent">Home</a>
+      <a href={url('/')} class="hover:text-accent">Home</a>
       <span class="mx-2">›</span>
-      <a href="/events/" class="hover:text-accent">Events</a>
+      <a href={url('/events/')} class="hover:text-accent">Events</a>
       <span class="mx-2">›</span>
       <span class="text-slate-600 truncate">{event.title}</span>
     </nav>
@@ -75,7 +76,7 @@ const excerpt = meta.event_excerpt?.replace(/<[^>]*>/g, '').slice(0, 160) || '';
     }
 
     <div class="mt-12 pt-8 border-t border-slate-100">
-      <a href="/events/" class="text-sm font-medium text-accent hover:underline">← Back to Events</a>
+      <a href={url('/events/')} class="text-sm font-medium text-accent hover:underline">← Back to Events</a>
     </div>
   </article>
 </BaseLayout>

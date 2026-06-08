@@ -1,4 +1,6 @@
 ---
+import { url } from '../lib/url.js';
+
 interface Props {
   categories: { slug: string; name: string }[];
   basePath: string;
@@ -7,7 +9,7 @@ interface Props {
 }
 
 const { categories, basePath, allHref, current } = Astro.props;
-const allLink = allHref ?? basePath;
+const allLink = url(allHref ?? basePath);
 ---
 
 <div class="flex flex-wrap gap-2">
@@ -24,7 +26,7 @@ const allLink = allHref ?? basePath;
   </a>
   {categories.map((cat) => (
     <a
-      href={`${basePath}${cat.slug}/`}
+      href={url(`${basePath}${cat.slug}/`)}
       class={[
         'px-4 py-1.5 rounded-full text-sm font-medium transition-colors',
         current === cat.slug

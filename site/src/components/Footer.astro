@@ -1,4 +1,5 @@
 ---
+import { url } from '../lib/url.js';
 const year = new Date().getFullYear();
 ---
 
@@ -12,19 +13,19 @@ const year = new Date().getFullYear();
       <div>
         <p class="text-white font-semibold mb-3">Content</p>
         <ul class="space-y-1 text-sm">
-          <li><a href="/insights/" class="hover:text-white transition-colors">Insights</a></li>
-          <li><a href="/icu/" class="hover:text-white transition-colors">ICU</a></li>
-          <li><a href="/work/" class="hover:text-white transition-colors">Work</a></li>
-          <li><a href="/podcast/" class="hover:text-white transition-colors">Podcast</a></li>
-          <li><a href="/guides/" class="hover:text-white transition-colors">Guides</a></li>
+          <li><a href={url('/insights/')} class="hover:text-white transition-colors">Insights</a></li>
+          <li><a href={url('/icu/')} class="hover:text-white transition-colors">ICU</a></li>
+          <li><a href={url('/work/')} class="hover:text-white transition-colors">Work</a></li>
+          <li><a href={url('/podcast/')} class="hover:text-white transition-colors">Podcast</a></li>
+          <li><a href={url('/guides/')} class="hover:text-white transition-colors">Guides</a></li>
         </ul>
       </div>
       <div>
         <p class="text-white font-semibold mb-3">Company</p>
         <ul class="space-y-1 text-sm">
-          <li><a href="/team/" class="hover:text-white transition-colors">Team</a></li>
-          <li><a href="/events/" class="hover:text-white transition-colors">Events</a></li>
-          <li><a href="/news/" class="hover:text-white transition-colors">News</a></li>
+          <li><a href={url('/team/')} class="hover:text-white transition-colors">Team</a></li>
+          <li><a href={url('/events/')} class="hover:text-white transition-colors">Events</a></li>
+          <li><a href={url('/news/')} class="hover:text-white transition-colors">News</a></li>
         </ul>
       </div>
     </div>

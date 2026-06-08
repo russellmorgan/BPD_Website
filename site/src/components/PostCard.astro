@@ -1,4 +1,6 @@
 ---
+import { url } from '../lib/url.js';
+
 interface Props {
   title: string;
   slug: string;
@@ -48,7 +50,7 @@ const snippet = snippetText.length === 180 ? snippetText + '…' : snippetText;
     </div>
 
     <h2 class="text-base font-semibold text-slate-900 leading-snug mb-2 line-clamp-3">
-      <a href={href} class="hover:text-accent transition-colors">{title}</a>
+      <a href={url(href)} class="hover:text-accent transition-colors">{title}</a>
     </h2>
 
     {snippet && (
@@ -57,7 +59,7 @@ const snippet = snippetText.length === 180 ? snippetText + '…' : snippetText;
 
     <div class="mt-auto flex items-center justify-between">
       <time class="text-xs text-slate-400">{dateStr}</time>
-      <a href={href} class="text-xs font-medium text-accent hover:underline">Read more →</a>
+      <a href={url(href)} class="text-xs font-medium text-accent hover:underline">Read more →</a>
     </div>
   </div>
 </article>

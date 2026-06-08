@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import staff from '../../data/staff.json';
+import { url } from '../../lib/url.js';
 
 // Sort by menu order (original site order)
 const sorted = [...staff].sort((a, b) => a.menuOrder - b.menuOrder);
@@ -18,7 +19,7 @@ const sorted = [...staff].sort((a, b) => a.menuOrder - b.menuOrder);
         const bioSnippet = bio && bio.length === 160 ? bio + '…' : bio;
         return (
           <a
-            href={`/team/${person.slug}/`}
+            href={url(`/team/${person.slug}/`)}
             class="bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col"
           >
             <!-- Avatar placeholder -->
