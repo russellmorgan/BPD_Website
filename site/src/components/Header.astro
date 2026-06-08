@@ -1,13 +1,15 @@
 ---
+const base = import.meta.env.BASE_URL; // e.g. '/BPD_Website/'
+
 const NAV = [
-  { label: 'Insights', href: '/insights/' },
-  { label: 'ICU', href: '/icu/' },
-  { label: 'Work', href: '/work/' },
-  { label: 'Podcast', href: '/podcast/' },
-  { label: 'Team', href: '/team/' },
-  { label: 'Events', href: '/events/' },
-  { label: 'News', href: '/news/' },
-  { label: 'Guides', href: '/guides/' },
+  { label: 'Insights', href: `${base}insights/` },
+  { label: 'ICU', href: `${base}icu/` },
+  { label: 'Work', href: `${base}work/` },
+  { label: 'Podcast', href: `${base}podcast/` },
+  { label: 'Team', href: `${base}team/` },
+  { label: 'Events', href: `${base}events/` },
+  { label: 'News', href: `${base}news/` },
+  { label: 'Guides', href: `${base}guides/` },
 ];
 
 const current = Astro.url.pathname;
@@ -17,14 +19,14 @@ const current = Astro.url.pathname;
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="/" class="flex-shrink-0">
+      <a href={base} class="flex-shrink-0">
         <span class="text-white font-bold text-xl tracking-tight">BPD Healthcare</span>
       </a>
 
       <!-- Desktop nav -->
       <nav class="hidden lg:flex items-center gap-1">
         {NAV.map(({ label, href }) => {
-          const active = current === href || (href !== '/' && current.startsWith(href));
+          const active = current === href || (href !== base && current.startsWith(href));
           return (
             <a
               href={href}
@@ -61,7 +63,7 @@ const current = Astro.url.pathname;
   <div id="mobile-menu" class="hidden lg:hidden bg-brand-light border-t border-white/10">
     <nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
       {NAV.map(({ label, href }) => {
-        const active = current === href || (href !== '/' && current.startsWith(href));
+        const active = current === href || (href !== base && current.startsWith(href));
         return (
           <a
             href={href}
